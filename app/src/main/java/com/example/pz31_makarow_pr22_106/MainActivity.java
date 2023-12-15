@@ -5,7 +5,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Intent;
+import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout main_layout;
     TextView tvTxt;
     int i;
-
+    Intent intent;
     private static final int SWIPE_MIN_DISTANCE = 130;
     private static final int SWIPE_MAX_DISTANCE = 300;
     private static final int SWIPE_MIN_VELOCITY = 200;
@@ -52,8 +55,18 @@ public class MainActivity extends AppCompatActivity {
             if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_MIN_VELOCITY) {
                 startActivity(new Intent(MainActivity.this, MainActivity2.class));
             }
+            else if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_MIN_VELOCITY)
+            {
+                intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:55.754283,37.62002"));
+                startActivity(intent);
+            }
             return false;
         }
+    }
+
+    private void startActivityForResult(String actionImageCapture) {
     }
 }
 
